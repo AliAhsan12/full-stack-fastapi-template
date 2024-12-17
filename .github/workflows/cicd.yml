@@ -3,7 +3,7 @@ name: CI/CD Deployment on Self-Hosted Runner
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - 'frontend/**'
       - 'backend/**'
