@@ -7,11 +7,11 @@ FROM node:18 AS build
 WORKDIR /app
 
 # Copy the package.json and install dependencies
-COPY frontend/package.json ./ 
+COPY package.json ./ 
 RUN npm install
 
 # Copy all the frontend files
-COPY frontend /app
+COPY . .
 
 # Build the React app
 RUN npm run build

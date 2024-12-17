@@ -7,14 +7,14 @@ FROM python:3.9-slim AS build
 WORKDIR /app
 
 # Copy the requirements file and install dependencies
-COPY backend/requirements.txt .
+COPY requirements.txt .
 
 # Create a virtual environment and install dependencies
 RUN python3.9 -m venv /venv
 RUN /venv/bin/pip install -r requirements.txt
 
 # Copy the backend code into the container
-COPY backend /app
+COPY . .
 
 # Set the environment variable to use the virtual environment
 ENV PATH="/venv/bin:$PATH"
