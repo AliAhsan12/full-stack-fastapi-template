@@ -1,24 +1,28 @@
+# Frontend Dockerfile for React
+
 # Stage 1: Build React App
 FROM node:18 AS build
+
+# Set the working directory
 WORKDIR /app
 
-# Copy the package.json and package-lock.json (if exists) to install dependencies
-COPY package.json ./
+# Copy the package.json and install dependencies
+COPY frontend/package.json ./ 
 RUN npm install
 
-# Copy the rest of the application code to the container
-COPY . ./
+# Copy all the frontend files
+COPY frontend /app
 
 # Build the React app
 RUN npm run build
 
-# Stage 2: Serve App with nginx
+# Stage 2: Serve the app using Nginx
 FROM nginx:stable-alpine
 
-# Copy the built React app from the build stage
+# Copy the built React app into the Nginx server's HTML folder
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose the default port for Nginx (80)
+# Expose port 80 for the frontend
 EXPOSE 80
 
 # Start Nginx to serve the app

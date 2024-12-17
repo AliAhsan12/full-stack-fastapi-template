@@ -1,10 +1,18 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
+import { render } from 'react-dom';
+import { ChakraProvider } from "@chakra-ui/core";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+import Header from "./Components/Header";
+import Todos from "./Components/Todos";
+
+function App() {
+  return (
+    <ChakraProvider>
+      <Header />
+      <Todos />
+    </ChakraProvider>
+  )
+}
+
+const rootElement = document.getElementById("root")
+render(<App />, rootElement)
