@@ -22,7 +22,7 @@ jobs:
           sudo docker stop frontend-con || true
           sudo docker rm frontend-con || true
           sudo docker build -t frontend:latest .
-          sudo docker run -d --name frontend-con -p 3001:3000 frontend:latest
+          sudo docker run -d --name frontend-con -p 80:80 frontend:latest
 
   deploy-backend:
     name: Deploy Backend
