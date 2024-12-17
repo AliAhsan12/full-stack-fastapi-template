@@ -1,0 +1,42 @@
+name: CI/CD Deployment on Self-Hosted Runner
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'
+      - 'backend/**'
+
+jobs:
+  deploy-frontend:
+    name: Deploy Frontend
+    runs-on: self-hosted
+    if: contains(github.event.head_commit.modified, 'frontend/')
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Build and Run Frontend Docker Container
+        run: |
+          cd frontend
+          docker stop frontend-container || true
+          docker rm frontend-container || true
+          docker build -t frontend-image:latest .
+          docker run -d --name frontend-container -p 3000:3000 frontend-image:latest
+
+  deploy-backend:
+    name: Deploy Backend
+    runs-on: self-hosted
+    if: contains(github.event.head_commit.modified, 'backend/')
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Build and Run Backend Docker Container
+        run: |
+          cd backend
+          docker stop backend-container || true
+          docker rm backend-container || true
+          docker build -t backend-image:latest .
+          docker run -d --name backend-container -p 8000:8000 backend-image:latest
