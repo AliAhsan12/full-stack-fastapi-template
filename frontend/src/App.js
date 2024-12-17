@@ -15,7 +15,7 @@ function App() {
   return (
     <div style={{ textAlign: "center", marginTop: "20px" }}>
       <h1>React + FastAPI</h1>
-      <p>Message from Backend: {message || "Loading..."}</p>
+      <p>Message from Backend: {message || "Loading...."}</p>
     </div>
   );
 }
