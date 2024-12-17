@@ -35,7 +35,7 @@ function AddTodo() {
       "item": item
     }
 
-    fetch("http://localhost:8000/todo", {
+    fetch("http://localhost:8001/todo", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTodo)
@@ -63,7 +63,7 @@ function UpdateTodo({item, id}) {
   const {fetchTodos} = React.useContext(TodosContext)
 
   const updateTodo = async () => {
-    await fetch(`http://localhost:8000/todo/${id}`, {
+    await fetch(`http://localhost:8001/todo/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ item: todo })
@@ -106,7 +106,7 @@ function DeleteTodo({id}) {
   const {fetchTodos} = React.useContext(TodosContext)
 
   const deleteTodo = async () => {
-    await fetch(`http://localhost:8000/todo/${id}`, {
+    await fetch(`http://localhost:8001/todo/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: { "id": id }
@@ -138,7 +138,7 @@ function TodoHelper({item, id, fetchTodos}) {
 export default function Todos() {
   const [todos, setTodos] = useState([])
   const fetchTodos = async () => {
-    const response = await fetch("http://localhost:8000/todo")
+    const response = await fetch("http://localhost:8001/todo")
     const todos = await response.json()
     setTodos(todos.data)
   }
