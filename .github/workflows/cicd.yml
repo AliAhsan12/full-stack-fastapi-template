@@ -20,10 +20,10 @@ jobs:
       - name: Build and Run Frontend Docker Container
         run: |
           cd frontend
-          docker stop frontend-container || true
-          docker rm frontend-container || true
-          docker build -t frontend-image:latest .
-          docker run -d --name frontend-container -p 3000:3000 frontend-image:latest
+          sudo docker stop frontend-con || true
+          sudo docker rm frontend-con || true
+          sudo docker build -t frontend:latest .
+          sudo docker run -d --name frontend-con -p 3001:3000 frontend:latest
 
   deploy-backend:
     name: Deploy Backend
@@ -36,7 +36,7 @@ jobs:
       - name: Build and Run Backend Docker Container
         run: |
           cd backend
-          docker stop backend-container || true
-          docker rm backend-container || true
-          docker build -t backend-image:latest .
-          docker run -d --name backend-container -p 8000:8000 backend-image:latest
+          sudo docker stop backend-con || true
+          sudo docker rm backend-con || true
+          sudo docker build -t backend:latest .
+          sudo docker run -d --name backend-con -p 8000:8000 backend:latest
